@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.skt.ehs.mbs.db.maria.dao.EHSMapInfoDAO">
+
+    <resultMap id="result_building" type="EHSBuildingInfo">
+        <result property="campusID" column="CAMPUS_ID"/>
+        <result property="campusName" column="CAMPUS_NAME"/>
+        <result property="buildID" column="BUILDING_ID"/>   
+        <result property="buildName" column="BUILDING_NAME"/>   
+    </resultMap>
+    
+    <resultMap id="result_Floor" type="EHSFloorInfo">
+        <id property="floorID" column="FLOOR_ID"/>
+        <result property="floorName" column="FLOOR_NAME"/>
+        <result property="imageName" column="IMAGE_NAME"/>   
+    </resultMap>
+
+    <select id="selectArea" parameterType="string" resultMap="result_building">
+        SELECT A.CAMPUS_ID, A.CAMPUS_NAME, B.BUILDING_ID, B.BUILDING_NAME FROM campus as A inner join building as B where A.CAMPUS_ID = B.CAMPUS_ID
+    </select>
+
+    <select id="selectFloor" parameterType="int" resultMap="result_Floor">
+        SELECT B.FLOOR_ID, A.FLOOR_NAME, B.IMAGE_NAME FROM (SELECT FLOOR_ID, BUILDING_ID, IMAGE_NAME FROM map_image WHERE BUILDING_ID = #{buildingID}) AS B inner join FLOOR AS A WHERE A.FLOOR_ID = B.FLOOR_ID
+    </select>
+
+</mapper>

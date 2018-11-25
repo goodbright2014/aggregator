@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.skt.ehs.mbs.db.maria.dao.RawDataTagDAO">
+
+
+
+    <insert id="insertRawDataAP" parameterType="com.skt.ehs.mbs.db.maria.vo.RawDataTag" >
+        INSERT INTO raw_data_tag values(#{_tag_id},#{_seq_num},#{_seq_num_sub},#{_pos_x},#{_pos_y},#{_mag_bh},#{_smag_bv},#{_n_d},#{_n_b},#{_c_cell_id})
+    </insert>
+
+</mapper>

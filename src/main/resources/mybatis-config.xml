@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--
+        properties : 해당위치의 properties파일을 참조하여 현재 xml내에서 
+        ${name} 으로 값을 사용할 수 있습니다.
+        즉 properties에 선언된 db.properties에 username=xxxxx 라고 설정되어 있으면
+        아래의 <property name="username" value="${username}"/> 부분의 value에 xxxx가
+        치환되어 들어갑니다.
+        driver=com.mysql.jdbc.Driver
+        url=jdbc:mysql://localhost:3306/db이름
+        username=아이디
+        password=비밀번호
+    <properties resource="net/mybatis/tutorial/conf/db.properties"/>
+    -->
+
+    <!-- In Config XML file -->
+    <typeAliases>
+       <typeAlias alias="EHSUser" type="com.skt.ehs.mbs.db.maria.vo.EHSUser"/>
+       <typeAlias alias="EHSBuildingInfo" type="com.skt.ehs.mbs.db.maria.vo.EHSBuildingInfo"/>
+       <typeAlias alias="EHSFloorInfo" type="com.skt.ehs.mbs.db.maria.vo.EHSFloorInfo"/>
+       <typeAlias alias="RawDataTag" type="com.skt.ehs.mbs.db.maria.vo.RawDataTag"/>
+       <typeAlias alias="RawDataAP" type="com.skt.ehs.mbs.db.maria.vo.RawDataAP"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <!-- connecting to Local MySql -->
+            <dataSource type="POOLED">
+                <property name="driver" value="org.mariadb.jdbc.Driver" />
+                <property name="url" value="jdbc:mariadb://210.116.106.157:3306/ehs" />
+                <property name="username" value="dba_entels" />
+                <property name="password" value="entels!Q@W" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="db/maria/mapper/EHSUserMapper.xml" />
+        <mapper resource="db/maria/mapper/EHSMapInfoMapper.xml" />
+        <mapper resource="db/maria/mapper/RawDataTagMapper.xml" />
+        <mapper resource="db/maria/mapper/RawDataAPMapper.xml" />
+    </mappers>
+
+</configuration>

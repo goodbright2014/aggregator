@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.skt.ehs.mbs.db.maria.dao.EHSUserDAO">
+
+<resultMap id="result" type="EHSUser">
+    <id property="USER_ID" column="USER_ID"/>
+    <result property="USER_GROUP_ID" column="USER_GROUP_ID"/>
+    <result property="PASSWORD" column="PASSWORD"/>
+</resultMap>
+
+<select id="selectUser" parameterType="string" resultMap="result">
+    <!--     <select id="selectUser" parameterType="string" resulType="EHSUser">-->
+    SELECT USER_ID, USER_GROUP_ID, PASSWORD FROM p_user WHERE USER_ID = #{userID}
+</select>
+
+<select id="selectUsers" resultMap="result">
+    SELECT USER_ID, USER_GROUP_ID, PASSWORD FROM p_user
+</select>
+
+</mapper>
